@@ -22,4 +22,4 @@ FacebookSocialPlugins.helpers.each do |name|
 	require "facebook-social_plugins/#{name}_helper"
 end
 
-require 'facebook-social_plugins/rails/engine'
+require 'facebook-social_plugins/rails/engine' if defined?(::Rails::Engine)
