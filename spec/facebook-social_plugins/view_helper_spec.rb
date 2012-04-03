@@ -10,6 +10,20 @@ describe FacebookSocialPlugins::ViewHelper do
     end
   end
 
+  describe 'Analytics meta tag' do
+    it "should create :meta" do
+      output = fb_analytics 12345
+      output.should == "<meta content=\"12345\" property=\"fb:admins\"></meta>"
+    end
+  end
+
+  describe 'Facebook Root placeholder' do
+    it "should create :root div" do
+      output = fb_root
+      output.should == "<div class=\"fb-root\"></div>"
+    end
+  end
+
   describe 'Activity Feed' do
     it "should create :activity div" do
       output = fb_activity_feed :site => 'www.example.com'

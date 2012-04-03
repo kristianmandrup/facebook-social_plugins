@@ -1,8 +1,12 @@
 module FacebookSocialPlugins
 	module ViewHelper
 		def fb_root
-			content_tag :div, :class => "fb-root"
+			content_tag :div, '', :class => "fb-root"
 		end
+
+		def fb_analytics app_id
+			FacebookSocialPlugins::Analytics.new(app_id).render
+		end		
 
 		def fb_activity_feed options = {}
 			FacebookSocialPlugins::ActivityFeed.new(options).render
