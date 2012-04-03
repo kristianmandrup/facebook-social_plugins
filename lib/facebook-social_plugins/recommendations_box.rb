@@ -34,7 +34,7 @@ module FacebookSocialPlugins
 		#           Otherwise the valid values are 1-180, which specifies the number of days.		
 		def attributes
 			super.merge(:site => :string, :action => :string, :app_id => :string, :height => :integer, 
-				:header => :string, :linktarget => ['_top', '_parent'], :ref => :string, 
+				:header => :string, :linktarget => linktargets, :ref => :string, 
 				:max_age => :integer, :width => :integer)
 		end
 	end

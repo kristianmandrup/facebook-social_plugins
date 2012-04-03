@@ -44,6 +44,14 @@ module FacebookSocialPlugins
 			FacebookSocialPlugins::LoginButton.new(options).render
 		end
 
+		def fb_logout &block
+			content_tag :script, %Q{FB.Event.subscribe("auth.logout", function() { #{yield} });}
+		end
+
+		def fb_logout_and_redirect_to path
+			content_tag :script, %Q{FB.Event.subscribe("auth.logout", function() {window.location = #{path} });}
+		end
+
 		def fb_recommendations_box options = {}
 			FacebookSocialPlugins::RecommendationsBox.new(options).render
 		end

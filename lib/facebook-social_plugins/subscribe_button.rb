@@ -18,7 +18,7 @@ module FacebookSocialPlugins
 		# font - the font to display in the plugin. Options: 'arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'
 		# width - the width of the plugin.		
 		def attributes
-			super.merge(:href => :string, :layout => ['standard', 'button_count', 'box_count'], 
+			super.merge(:href => :string, :layout => layouts, 
 				:show_faces => :boolean, :width => :integer)
 		end
 	end

@@ -5,7 +5,7 @@ require 'facebook-social_plugins/open_graph/meta_helper'
 
 module FacebookSocialPlugins
 	def self.plugins
-		['activity_feed', 'add_to_timeline', 'comments', 'facepile', 'like_box', 'like_button', 
+		['activity_feed', 'add_to_timeline', 'comments', 'facepile', 'like_box', 'like_button',
 			'live_stream', 'login_button', 'recommendations_box', 'registration', 'send_button', 'subscribe_button']
 	end
 

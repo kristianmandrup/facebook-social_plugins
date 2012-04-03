@@ -12,7 +12,7 @@ module FacebookSocialPlugins
 
 		# attributes always availabe for a button?
 		def attributes
-			super.merge(:font => ['arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'], :colorscheme => ['light', 'dark'])
+			super.merge(:font => fonts, :colorscheme => colorschemes)
 		end
 	end
 end

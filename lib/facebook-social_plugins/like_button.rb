@@ -24,7 +24,7 @@ module FacebookSocialPlugins
 			# fb_source - the stream type ('home', 'profile', 'search', 'ticker', 'tickerdialog' or 'other') in which the click occurred and the story type ('oneline' or 'multiline'), concatenated with an underscore.		
 		def attributes
 			super.merge(
-				:href => :string, :send => :boolean, :layout => ['standard', 'button_count', 'box_count'],
+				:href => :string, :send => :boolean, :layout => layouts,
 				:show_faces => :boolean, :action => ['like', 'recommend'], :ref => :string,
 				:fb_ref => :string, :fb_source => :special, :width => :integer
 			)

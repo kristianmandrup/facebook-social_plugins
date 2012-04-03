@@ -27,8 +27,12 @@ module FacebookSocialPlugins
 		# target	Optional. The target of the form submission: _top (default), _parent, or _self.
 		def attributes
 			super.merge(:client_id => :string, :redirect_uri => :string, :fields => :string, 
-				:fb_only => :boolean, :fb_register => :boolean, :border_color => :string, :target => ['_top', '_parent', '_self']
+				:fb_only => :boolean, :fb_register => :boolean, :border_color => :string, :target => targets
 			)
+		end
+
+		def targets
+			['_top', '_parent', '_self']
 		end
 
 		# Named Fields

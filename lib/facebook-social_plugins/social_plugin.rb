@@ -29,6 +29,26 @@ module FacebookSocialPlugins
 
 		protected
 
+		def layouts
+			['standard', 'button_count', 'box_count']
+		end
+
+		def sizes
+			['small', 'large']
+		end
+
+		def fonts
+			['arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana']
+		end
+
+		def colorschemes
+			['light', 'dark']
+		end
+
+		def linktargets
+			['_top', '_parent']
+		end
+
 		def find_att_key key
 			return key if attributes[key]
 			key = key.to_s.dasherize.to_sym			

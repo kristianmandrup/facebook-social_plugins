@@ -11,4 +11,3 @@ module FacebookSocialPlugins
 		end
 	end
 end
-

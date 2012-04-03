@@ -26,8 +26,8 @@ module FacebookSocialPlugins
 		def attributes
 			super.merge(
 				:site => :string, :action => :array, :app_id => :string, :width => :integer, :height => :integer,
-				:header => :boolean, :colorscheme => ['light', 'dark'], :font => ['arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'],
-				:border_color => :string, :recommendations => :boolean, :filter => :string, :linktarget => ['_top', '_parent'],
+				:header => :boolean, :colorscheme => colorschemes, :font => fonts,
+				:border_color => :string, :recommendations => :boolean, :filter => :string, :linktarget => linktargets,
 				:ref => :string, :max_age => :integer, :width => :integer
 			)
 		end

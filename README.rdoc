@@ -114,6 +114,9 @@ Open graph <meta> tag helpers
 * fb_analytics(app_id) # Facebook analytics meta tag
 * fb_activity(namespace, action) # Open Graph action to perform
 
+* fb_logout(script) # setup FB event handler to trigger on FB logout
+* fb_logout_and_redirect_to(path) # setup FB event handler to trigger on FB logout and redirect
+
 == Social plugins
 
 Currently the following Social plugins are included in this gem
