@@ -93,18 +93,20 @@ Currently the following Social plugins are included in this gem
 View methods exposed:
 
 * fb_root
-* fb_activity options = {}
-* fb_add_to_timeline options = {}
-* fb_comments options = {}
-* fb_facepile options = {}
-* fb_like_box options = {}
-* fb_like_button options = {}
-* fb_live_stream options = {}
-* fb_login_button options = {}
-* fb_recommendations_box options = {}
-* fb_registration options = {}
-* fb_send_button options = {}
-* fb_subscribe_button options = {}
+* fb_activity (options = {})
+* fb_add_to_timeline (options = {})
+* fb_comments (options = {})
+* fb_facepile (options = {})
+* fb_like_box (options = {})
+* fb_like_button (options = {})
+* fb_live_stream (options = {})
+* fb_login_button (options = {})
+* fb_recommendations_box (options = {})
+* fb_registration (options = {})
+* fb_send_button (options = {})
+* fb_subscribe_button (options = {})
+
+Note: You don't have to worry about dashed or underscored properties. Conversions will be handled automatically. The Facebook Social plugins API is (sadly) not very consistent when it comes to attribute names. 
 
 === Activity feed
 
