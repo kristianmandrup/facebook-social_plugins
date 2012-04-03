@@ -13,8 +13,8 @@ module FacebookSocialPlugins
 		# height - the height of the plugin in pixels. Minimum recommended height: 200px.
 		# always-post-to-friends - whether to always post to friend, default: false
 		def attributes
-			super.merge(:via_url => :string, :xid => :string, :event_app_id => :string, 
-				:height => :integer, :always_post_to_friends => :boolean, :width => :integer)
+			super.merge(:'via-url' => :string, :xid => :string, :'event-app-id' => :string, 
+				:height => :integer, :'always-post-to-friends' => :boolean, :width => :integer)
 		end
 	end
 end

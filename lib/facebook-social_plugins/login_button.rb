@@ -17,7 +17,7 @@ module FacebookSocialPlugins
 		#  				If your application needs to access other parts of the user's profile that may be 
 		#					private, your application can request extended permissions. 
 		def attributes
-			super.merge(:show_faces => :boolean, :max_rows => :integer, :scope => :array, :width => :integer)
+			super.merge(:'show-faces' => :boolean, :'max-rows' => :integer, :scope => :array, :width => :integer)
 		end
 	end
 end

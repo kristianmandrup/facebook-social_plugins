@@ -1,23 +1,41 @@
+require 'facebook-social_plugins/ui_helper'
+
 module FacebookSocialPlugins
-	class SocialPlugin
+	class SocialPlugin < UiHelper
+
+		attr_reader :options
+
 		def initialize options = {}
-			validate!
 			@options = options
+			validate!
 		end
 
 		def render
-			content_tag :div, render_options.merge(:class => plugin_class)
+			content_tag :div, '', render_options.merge(:class => plugin_class)
 		end
 
 		# the :special type indicates call to special type validator
 		def validate!
 			return if options.empty?
+			valid_options = {}
 			options.each do |key, value|
-				attributes[key] == :special ? send("validate_#{key}", value) : valid?(value, attributes[key])				
+				attr_key = find_att_key(key)
+				raise ArgumentError, "Unknown or unsupported attribute #{key}" unless attr_key
+				attributes[attr_key] == :special ? send("validate_#{key.to_s.underscore}", value) : valid?(value, attributes[attr_key])
+				valid_options[attr_key] = value
 			end
+			@options = valid_options
 		end
 
 		protected
+
+		def find_att_key key
+			return key if attributes[key]
+			key = key.to_s.dasherize.to_sym			
+			return key if attributes[key]
+			key = key.to_s.underscore.to_sym
+			key if attributes[key]
+		end
 
 		# :width => 200 mapped to become 'data-width' => 200
 		def render_options
@@ -35,16 +53,32 @@ module FacebookSocialPlugins
 		def valid? value, valid_type
 			case valid_type
 			when :string
-				raise ArgumentError, "Must be a String, was #{value}" unless value.is_a?(String) || value.is_a?(Symbol)
+				raise ArgumentError, "Must be a String, was #{value}" unless string?(value)
 			when :array
-				raise ArgumentError, "Must be an Array or a String, was #{value}" unless value.is_a?(String) || value.is_a?(Symbol) || value.is_a?(Array)
+				raise ArgumentError, "Must be an Array or a String, was #{value}" unless array?(value)
 			when :integer
-				raise ArgumentError, "Must be a Fixnum, was #{value}" unless value.is_a?(Fixnum)
+				raise ArgumentError, "Must be a Fixnum, was #{value}" unless integer?(value)
 			when :boolean
-				raise ArgumentError, "Must be a Boolean, was #{value}" unless value.is_a?(Boolean)
+				raise ArgumentError, "Must be a Boolean, was #{value}" unless boolean?(value)
 			when Array
 				raise ArgumentError, "Must be a one of #{valid_type.inspect}, was #{value}" unless valid_type.include?(value.to_s)
 			end
 		end
+
+		def string? value
+			value.is_a?(String) || value.is_a?(Symbol)
+		end
+
+		def array? value
+			value.is_a?(String) || value.is_a?(Symbol) || value.is_a?(Array)
+		end
+
+		def integer? value
+    	value.is_a?(Fixnum) && value > 0
+    end
+
+		def boolean? value
+    	value.is_a?(TrueClass) || value.is_a?(FalseClass) 
+    end
 	end
 end

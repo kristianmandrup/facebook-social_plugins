@@ -1,22 +1,22 @@
-require 'facebook-buttons/social_plugin'
-require 'facebook-buttons/button'
+require 'facebook-social_plugins/button'
 
-module FacebookButtons
-	def self.available
+module FacebookSocialPlugins
+	def self.plugins
 		['activity_feed', 'add_to_timeline', 'comments', 'facepile', 'like_box', 'like_button', 
 			'live_stream', 'login_button', 'recommendations_box', 'registration', 'send_button', 'subscribe_button']
 	end
 
 	def self.helpers
 		['script', 'view']
+	end
 end
 
-FacebookButtons.available_buttons.each do |name|
-	require "facebook-buttons/#{name}"
+FacebookSocialPlugins.plugins.each do |name|
+	require "facebook-social_plugins/#{name}"
 end
 
-FacebookButtons.available_helpers.each do |name|
-	require "facebook-buttons/#{name}_helper"
+FacebookSocialPlugins.helpers.each do |name|
+	require "facebook-social_plugins/#{name}_helper"
 end
 
-require 'facebook-buttons/rails/engine'
+require 'facebook-social_plugins/rails/engine'

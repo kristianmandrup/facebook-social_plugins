@@ -4,7 +4,7 @@ module FacebookSocialPlugins
 			content_tag :div, :class => "fb-root"
 		end
 
-		def fb_activity options = {}
+		def fb_activity_feed options = {}
 			FacebookSocialPlugins::ActivityFeed.new(options).render
 		end
 

@@ -21,7 +21,8 @@ module FacebookSocialPlugins
 			# colorscheme - the color scheme for the like button. Options: 'light', 'dark'
 			# ref - a label for tracking referrals; must be less than 50 characters and can contain alphanumeric characters and some punctuation (currently +/=-.:_). The ref attribute causes two parameters to be added to the referrer URL when a user clicks a link from a stream story about a Like action:
 			# fb_ref - the ref parameter
-			# fb_source - the stream type ('home', 'profile', 'search', 'ticker', 'tickerdialog' or 'other') in which the click occurred and the story type ('oneline' or 'multiline'), concatenated with an underscore.		def attributes
+			# fb_source - the stream type ('home', 'profile', 'search', 'ticker', 'tickerdialog' or 'other') in which the click occurred and the story type ('oneline' or 'multiline'), concatenated with an underscore.		
+		def attributes
 			super.merge(
 				:href => :string, :send => :boolean, :layout => ['standard', 'button_count', 'box_count'],
 				:show_faces => :boolean, :action => ['like', 'recommend'], :ref => :string,
@@ -32,7 +33,7 @@ module FacebookSocialPlugins
 		def validate_fb_source value
 			raise ArgumentError, "The fb_source option must have a [stream type]_[story line] format, was #{value}" unless value =~ /\S+_\S+/
 
-			[stream_type, story_line] = value.split('_')
+			stream_type, story_line = value.split('_')
 			raise ArgumentError, "Not a valid stream type, must be one of #{stream_types}, was #{stream_type}" unless stream_types.include?(stream_type)
 			raise ArgumentError, "Not a valid story line, must be one of #{story_lines}, was #{story_line}" unless story_lines.include?(story_line)
 		end
@@ -46,6 +47,5 @@ module FacebookSocialPlugins
 		def story_lines 
 			['oneline', 'multiline']
 		end
-
 	end
 end

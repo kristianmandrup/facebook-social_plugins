@@ -1,4 +1,4 @@
-module FacebookButtons
+module FacebookSocialPlugins
 	module ScriptHelper
 
 		# app_id - facebook app id, a number/string, fx '753632322'
@@ -21,12 +21,12 @@ module FacebookButtons
 }
 		 end			
 
-		def facebook_script locale = :en
+		def facebook_script locale = :en_US
 			%Q{
 (function(d){
    var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
    js = d.createElement('script'); js.id = id; js.async = true;
-   js.src = #{all_script locale};
+   js.src = "#{all_script locale}";
    d.getElementsByTagName('head')[0].appendChild(js);
  }(document));
 }

@@ -4,7 +4,7 @@ module FacebookSocialPlugins
 			super
 		end
 
-		def button_class
+		def plugin_class
 			'fb-send'
 		end
 
@@ -15,7 +15,9 @@ module FacebookSocialPlugins
 		# fb_ref - the ref parameter
 		# fb_source - the story type ('message', 'group', 'email') in which the click occurred.
 		def attributes
-			super.merge(:href => :string, :ref => :string, :fb_ref => :string, :fb_source => ['message', 'group', 'email'])
+			super.merge(:href => :string, :ref => :string, :fb_ref => :string, 
+				:fb_source => ['message', 'group', 'email']
+			)
 		end
 	end
 end

@@ -29,7 +29,7 @@ module FacebookSocialPlugins
 		# href - the referenced page
 		# max_rows - max rows to display, 1-10 normally
 		def attributes
-			super.merge(:app_id => :string, :action => :string, :href => :string, 
+			super.merge(:'event-app-id' => :string, :action => :string, :href => :string, 
 				:max_rows => :integer, :size => ['small', 'large'], :width => :integer
 			)
 		end

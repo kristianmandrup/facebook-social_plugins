@@ -9,10 +9,6 @@ The `ViewHelper` contains methods for inserting the HTML5 <div> elements for Fac
 
 The `ScriptHelper` contains methods for inserting <script> snippets for Facebook integration, such as displaying the Social plugins with the Facebook layout/styling applied etc.
 
-== Status - April 3, 2012
-
-Currently not tested. Specs needed! This is an early beta. Please help make it better :)
-
 == Script Helpers
 
 * async_init_script(app_id, domain, options = {})
