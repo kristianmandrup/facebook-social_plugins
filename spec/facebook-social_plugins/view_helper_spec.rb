@@ -17,6 +17,13 @@ describe FacebookSocialPlugins::ViewHelper do
     end
   end
 
+  describe 'Logout button' do
+    it "should create :logout button (anchor with image" do
+      output = fb_logout_button :size => :large
+      output.should == "<a href=\"#\" id=\"fb_logout_and_reload\"><img alt=\"Facebook Logout\" id=\"fb_logout_image\" src=\"/assets/fb_logout_large.gif\"></img></a>"
+    end
+  end
+
   describe 'Facebook Root placeholder' do
     it "should create :root div" do
       output = fb_root

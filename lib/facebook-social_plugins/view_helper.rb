@@ -46,7 +46,7 @@ module FacebookSocialPlugins
 
 		def fb_logout_button options = {}
 			content_tag :a, '', {:id => 'fb_logout_and_reload', :href => '#'}.merge(options[:html] || {}) do
-				content_tag :img, :id => 'fb_logout_image', :src => "/assets/fb_logout_#{options[:size] || :small}.gif", :alt => "Facebook Logout"
+				content_tag(:img, '', :id => 'fb_logout_image', :src => "/assets/fb_logout_#{options[:size] || :small}.gif", :alt => "Facebook Logout").html_safe
 			end
 		end
 
