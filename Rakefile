@@ -17,7 +17,7 @@ Jeweler::Tasks.new do |gem|
   gem.name = "facebook-social_plugins"
   gem.homepage = "http://github.com/kristianmandrup/facebook-social_plugins"
   gem.license = "MIT"
-  gem.summary = %Q{Facebook social plugins for Rails 3 using HTML5}
+  gem.summary = %Q{Facebook HTML5 style social plugins for Rails 3}
   gem.description = %Q{HTML5 compatible social plugin helpers for Rails 3}
   gem.email = "kmandrup@gmail.com"
   gem.authors = ["Kristian Mandrup"]
