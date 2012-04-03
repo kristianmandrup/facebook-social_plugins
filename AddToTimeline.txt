@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"> 
+
+<head prefix="og: http://ogp.me/ns# og_recipebox: http://ogp.me/ns/apps/YOUR_NAMESPACEx#"> 
+    <meta property="fb:app_id" content="YOUR_APP_ID" /> 
+    <meta property="og:type" content="YOUR_NAMESPACE:recipe" /> 
+    <meta property="og:title" content="Oreo Stuffed Cookies" /> 
+    <meta property="og:image" content="http://YOUR_URL/cookie.jpg" /> 
+    <meta property="og:description" content="The Turducken of Cookies" /> 
+    <meta property="og:url" content="http://YOUR_URL/cookie.html"> 
+
+    <script type="text/javascript">
+    function postCook()
+    {
+        FB.api('/me/YOUR_NAMESPACE:cook&recipe=http://YOUR_URL/cookie.html','post',  function(response) {
+            if (!response || response.error) {
+                alert('Error occured');
+              } else {
+                alert('Post was successful! Action ID: ' + response.id);
+              }
+        });
+    }
+    </script>
+</head> 
+
+<body> 
+    <div id="fb-root"></div>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <script>
+        FB.init({ 
+            appId:'YOUR_APP_ID', cookie:true, 
+                    status:true, xfbml:true, oauth:true
+        });
+        </script>
+        <fb:add-to-timeline></fb:add-to-timeline>>
+        <h3>
+            <font size="30" face="verdana" color="grey">Stuffed Cookies
+            </font> 
+        </h3> 
+        <p>
+            <img title="Oreo Stuffed Cookies" src="http://YOUR_URL/cookie.jpg" width="550"/><br />
+        </p>       
+
+        <form>
+            <input type="button" value="Cook" onclick="postCook()" />
+        </form>
+
+        <fb:activity actions="YOUR_NAMESPACE:cook"></fb:activity>
+    </body> 
+</html>
