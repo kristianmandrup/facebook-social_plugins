@@ -57,17 +57,17 @@ describe FacebookSocialPlugins::ScriptHelper do
     end
   end
 
-  describe '#fb_login_and_reload' do
+  describe '#fb_login_and_react' do
     it 'should work' do
-      output = fb_login_and_reload :ready => true, :selector => '#fb_login'
-      output.should == "$(function() {\n\t\t$('#fb_login').click(function() { \n\t\tFB.Connect.requireSession(function() { reload(); }); return false;\n  }\n\n\t}\n"
+      output = fb_login_and_react :ready => true, :selector => '#fb_login', :scope => 'email,user_likes'
+      output.should == "$(function() {\n\t\t$('#fb_login').click(function() { \n\t\tFB.login(function(response) { \n\t\t\tif (response.authResponse) {\n\t\t\t\t// on success\n\t\t\t} else {\n\t\t\t\t// on failure\n\t\t\t}\t\t\t\n\t\t}); \n\t\treturn false;\n  }, {scope: 'email,user_likes'}\n\n\t}\n" 
     end
   end
 
-  describe '#fb_logout_and_reload' do
+  describe '#fb_logout_and_react' do
     it 'should work' do
-      output = fb_logout_and_reload(:ready => true)
-      output.should == "$(function() {\n\t\t$('#fb_logout_and_reload').click(function() { \n\t\tFB.Connect.logout(function() { reload(); }); return false;\n  }\n\n\t}\n"
+      output = fb_logout_and_react :ready => true, :failure => "console.log('failed FB logout');"
+      output.should == "$(function() {\n\t\t$('#fb_logout').click(function() { \n\t\tFB.login(function(response) { \n\t\t\tif (response.authResponse) {\n\t\t\t\t// on success\n\t\t\t} else {\n\t\t\t\tconsole.log('failed FB logout');\n\t\t\t}\t\t\t\n\t\t}); \n\t\treturn false;\n \t}\n\n\t}\n"
     end
   end
 

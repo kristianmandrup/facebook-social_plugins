@@ -2,20 +2,38 @@ module FacebookSocialPlugins
 	module ScriptHelper
 
 		# can be used inside a js.erb file or similar
-		def fb_login_and_reload options = {:ready => false, :selector => '#fb_login_and_reload'}
-			selector = options[:selector] || '#fb_login_and_reload'
+		def fb_login_and_react options = {:ready => false, :selector => '#fb_login', :success => 'reload();', :failure => ''}
+			selector = options[:selector] || '#fb_login'
+			success = options[:success] || '// on success'
+			failure = options[:failure] || '// on failure'
 			script = %Q{$('#{selector}').click(function() { 
-		FB.Connect.requireSession(function() { reload(); }); return false;
-  }
+		FB.login(function(response) { 
+			if (response.authResponse) {
+				#{success}
+			} else {
+				#{failure}
+			}			
+		}); 
+		return false;
+  }#{scope_permissions options[:scope]}
 }				
 			options[:ready] ? wrap_ready(script) : script
 		end
 
-		def fb_logout_and_reload options = {:ready => false, :selector => '#fb_logout_and_reload'}
-			selector = options[:selector] || '#fb_logout_and_reload'
+		def fb_logout_and_react options = {:ready => false, :selector => '#fb_logout', :success => 'reload();', :failure => ''}
+			selector = options[:selector] || '#fb_logout'
+			success = options[:success] || '// on success'
+			failure = options[:failure] || '// on failure'
 			script = %Q{$('#{selector}').click(function() { 
-		FB.Connect.logout(function() { reload(); }); return false;
-  }
+		FB.login(function(response) { 
+			if (response.authResponse) {
+				#{success}
+			} else {
+				#{failure}
+			}			
+		}); 
+		return false;
+ 	}
 }				
 			options[:ready] ? wrap_ready(script) : script
 		end
@@ -61,6 +79,18 @@ module FacebookSocialPlugins
 		end
 
 		protected
+
+		def scope_permissions scope
+			scopes = case scope
+			when Array
+				scope.join(',')
+			when String
+				scope
+			else
+				nil
+			end
+			scopes ? ", {scope: '#{scopes}'}" : ''
+		end			
 
 		def wrap_ready script
 			%Q{$(function() {
