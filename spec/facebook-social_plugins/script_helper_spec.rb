@@ -38,18 +38,43 @@ describe FacebookSocialPlugins::ScriptHelper do
   include ControllerTestHelpers,
           FacebookSocialPlugins::ScriptHelper
 
-  it "should create async init script" do
-    output = async_init_script '123', 'www.example.com'
-    output.should == async_script
+  describe '#async_init_script' do
+    it "should create async init script" do
+      output = fb_async_init_script '123', 'www.example.com'
+      output.should == async_script
+    end
   end
 
-  it "should create facebook script" do
-    output = facebook_script
-    output.should == fb_script
+  describe '#facebook_script' do
+    it "should create facebook script" do
+      output = fb_channel_script
+      output.should == fb_script
+    end
+
+    it "should create localized facebook script" do
+      output = fb_channel_script :es_LA
+      output.should == fb_script_es
+    end
   end
 
-  it "should create localized facebook script" do
-    output = facebook_script :es_LA
-    output.should == fb_script_es
+  describe '#fb_login_and_reload' do
+    it 'should work' do
+      output = fb_login_and_reload :ready => true, :selector => '#fb_login'
+      output.should == "$(function() {\n\t\t$('#fb_login').click(function() { \n\t\tFB.Connect.requireSession(function() { reload(); }); return false;\n  }\n\n\t}\n"
+    end
+  end
+
+  describe '#fb_logout_and_reload' do
+    it 'should work' do
+      output = fb_logout_and_reload(:ready => true)
+      output.should == "$(function() {\n\t\t$('#fb_logout_and_reload').click(function() { \n\t\tFB.Connect.logout(function() { reload(); }); return false;\n  }\n\n\t}\n"
+    end
+  end
+
+  describe '#fb_logout_and_redirect_to' do
+    it 'should work' do
+      output = fb_logout_and_redirect_to('facebook/logout', :ready => true)
+      output.should == "$(function() {\n\t\tFB.Event.subscribe(\"auth.logout\", function() { \n\twindow.location = 'facebook/logout' \n\t}); \n\n\t}\n"
+    end
   end
 end

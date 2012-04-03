@@ -67,7 +67,7 @@ module FacebookSocialPlugins
 		end
 
 		def attributes
-			@attributes ||= {}
+			@attributes ||= {:id => :string, :style => :string}
 		end
 
 		def valid? value, valid_type

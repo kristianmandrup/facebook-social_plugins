@@ -1,11 +1,39 @@
 module FacebookSocialPlugins
 	module ScriptHelper
 
+		# can be used inside a js.erb file or similar
+		def fb_login_and_reload options = {:ready => false, :selector => '#fb_login_and_reload'}
+			selector = options[:selector] || '#fb_login_and_reload'
+			script = %Q{$('#{selector}').click(function() { 
+		FB.Connect.requireSession(function() { reload(); }); return false;
+  }
+}				
+			options[:ready] ? wrap_ready(script) : script
+		end
+
+		def fb_logout_and_reload options = {:ready => false, :selector => '#fb_logout_and_reload'}
+			selector = options[:selector] || '#fb_logout_and_reload'
+			script = %Q{$('#{selector}').click(function() { 
+		FB.Connect.logout(function() { reload(); }); return false;
+  }
+}				
+			options[:ready] ? wrap_ready(script) : script
+		end
+
+		def fb_logout_and_redirect_to path, options = {:ready => false}
+			script = %Q{FB.Event.subscribe("auth.logout", function() { 
+	window.location = '#{path}' 
+	}); 
+}
+			options[:ready] ? wrap_ready(script) : script
+		end
+
+
 		# app_id - facebook app id, a number/string, fx '753632322'
 		# domain - fx www.example.com
 		# options - status, cookie, xfbml (true|false)
 		# - :channel => 'channel.html'
-		def async_init_script app_id, domain, options = {}
+		def fb_async_init_script app_id, domain, options = {}
 			%Q{
   window.fbAsyncInit = function() {
     FB.init({
@@ -21,7 +49,7 @@ module FacebookSocialPlugins
 }
 		 end			
 
-		def facebook_script locale = :en_US
+		def fb_channel_script locale = :en_US
 			%Q{
 (function(d){
    var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
@@ -33,6 +61,13 @@ module FacebookSocialPlugins
 		end
 
 		protected
+
+		def wrap_ready script
+			%Q{$(function() {
+		#{script}
+	}
+}
+		end
 
 		# The JavaScript SDK is available in all locales that are supported by Facebook. 
 		# This list of supported locales is available as an XML file. 

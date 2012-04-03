@@ -44,12 +44,14 @@ module FacebookSocialPlugins
 			FacebookSocialPlugins::LoginButton.new(options).render
 		end
 
-		def fb_logout &block
-			content_tag :script, %Q{FB.Event.subscribe("auth.logout", function() { #{yield} });}
+		def fb_logout_button options = {}
+			content_tag :a, '', {:id => 'fb_logout_and_reload', :href => '#'}.merge(options[:html] || {}) do
+				content_tag :img, :id => 'fb_logout_image', :src => "http://static.ak.fbcdn.net/images/fbconnect/logout-buttons/logout_#{options[:size] || :small}.gif", :alt => "Facebook Logout"
+			end
 		end
 
-		def fb_logout_and_redirect_to path
-			content_tag :script, %Q{FB.Event.subscribe("auth.logout", function() {window.location = #{path} });}
+		def fb_logout &block
+			content_tag :script, %Q{FB.Event.subscribe("auth.logout", function() { #{yield} });}
 		end
 
 		def fb_recommendations_box options = {}

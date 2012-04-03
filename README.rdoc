@@ -92,6 +92,17 @@ The JavaScript SDK is available in all locales that are supported by Facebook. T
    }(document));
 </script>
 
+=== Configuration scripts*
+
+* fb_async_init_script(app_id, domain)
+* fb_channel_script(locale = :en_US)
+
+=== Login and Logout
+
+* fb_logout_and_reload(options = {:ready => false, :selector => '#fb_logout_and_reload'})
+* fb_login_and_reload(options = {:ready => false, :selector => '#fb_login_and_reload'})
+* fb_logout_and_redirect_to(path, options = {:ready => false})
+
 == Open Graph Meta helper
 
 Convenience method to generate all header/meta tags for Facebook Open Graph
@@ -150,7 +161,15 @@ View methods exposed:
 * fb_send_button (options = {})
 * fb_subscribe_button (options = {})
 
-Note: You don't have to worry about dashed or underscored properties. Conversions will be handled automatically. The Facebook Social plugins API is (sadly) not very consistent when it comes to attribute names. 
+Note: You don't have to worry about dashed or underscored properties. Conversions will be handled automatically. The Facebook Social plugins API is (sadly) not very consistent when it comes to attribute names.
+
+Extras:
+
+* fb_logout_button(options = {}) # renders logout button (english only)
+
+Logout button options: 
+html: (html options for anchor tag)
+size: 'small' or 'large' (size of logout button img)
 
 === Facebook root
 
