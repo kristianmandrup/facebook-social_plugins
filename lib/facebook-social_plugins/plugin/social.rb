@@ -1,7 +1,5 @@
-require 'facebook-social_plugins/ui_helper'
-
-module FacebookSocialPlugins
-	class SocialPlugin < UiHelper
+module FacebookSocialPlugins::Plugin
+	class Social < UiHelper
 
 		attr_reader :options
 

@@ -1,5 +1,5 @@
-module FacebookSocialPlugins
-	class Registration < SocialPlugin
+module FacebookSocialPlugins::Plugin
+	class Registration < Social
 		attr_reader :named_fields
 
 		# <fb:registration 

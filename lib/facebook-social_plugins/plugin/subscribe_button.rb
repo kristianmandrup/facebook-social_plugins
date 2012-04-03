@@ -1,4 +1,4 @@
-module FacebookSocialPlugins
+module FacebookSocialPlugins::Plugin
 	class SubscribeButton < Button
 		def initialize options = {}
 			super

@@ -1,47 +1,93 @@
-module FacebookSocialPlugins
-	module ScriptHelper
+module FacebookSocialPlugins::Helper
+	module Script
 
 		# can be used inside a js.erb file or similar
-		def fb_login_and_react options = {:ready => false, :selector => '#fb_login', :success => 'reload();', :failure => ''}
+		def fb_login_click_react options = {:selector => '#fb_login'}, &block
 			selector = options[:selector] || '#fb_login'
-			success = options[:success] || '// on success'
-			failure = options[:failure] || '// on failure'
+			block_content = yield if block
+			on_success = options[:on_success] || block_content || '// on success'
+			on_fail = options[:on_fail] || '// on failure'
+
 			script = %Q{$('#{selector}').click(function() { 
-		FB.login(function(response) { 
-			if (response.authResponse) {
-				#{success}
-			} else {
-				#{failure}
-			}			
-		}); 
+		#{fb_login_react(options, &block)}
 		return false;
-  }#{scope_permissions options[:scope]}
+  }
 }				
 			options[:ready] ? wrap_ready(script) : script
 		end
 
-		def fb_logout_and_react options = {:ready => false, :selector => '#fb_logout', :success => 'reload();', :failure => ''}
-			selector = options[:selector] || '#fb_logout'
-			success = options[:success] || '// on success'
-			failure = options[:failure] || '// on failure'
+		def fb_login_react options = {}, &block
+			block_content = yield if block
+			on_success = options[:on_success] || block_content || '// on success'
+			on_fail = options[:on_fail] || '// on failure'
+
+			script = %Q{FB.login(function(response) { 
+		if (response.authResponse) {
+			#{on_success}
+		} else {
+			#{on_fail}
+		}			
+	}#{scope_permissions options[:scope]}); 
+}
+			options[:ready] ? wrap_ready(script) : script
+		end
+
+
+		def fb_logout_click_react options = {:selector => '#fb_logout'}, &block
+			selector 	= options[:selector] || '#fb_logout'
+			block_content = yield if block
+			on_done 	= options[:on_done] || block_content || '// on done'
 			script = %Q{$('#{selector}').click(function() { 
-		FB.login(function(response) { 
-			if (response.authResponse) {
-				#{success}
-			} else {
-				#{failure}
-			}			
-		}); 
+		#{fb_logout_react(:on_done => on_done)}
 		return false;
  	}
 }				
 			options[:ready] ? wrap_ready(script) : script
 		end
 
-		def fb_logout_and_redirect_to path, options = {:ready => false}
+		def fb_logout_react options = {}, &block
+			block_content = yield if block
+			on_done = options[:on_done] || block_content || '// on done'
+
+			script = %Q{FB.logout(function(response) { 
+		#{on_done}
+	});
+}
+			options[:ready] ? wrap_ready(script) : script
+		end
+
+		def fb_onlogout_redirect_to path, options = {}
 			script = %Q{FB.Event.subscribe("auth.logout", function() { 
 	window.location = '#{path}' 
 	}); 
+}
+			options[:ready] ? wrap_ready(script) : script
+		end
+
+		def fb_onlogout_react options = {}, &block
+			block_content = yield if block
+			reaction = options[:reaction] || block_content || ' // on logout'
+			script = %Q{FB.Event.subscribe("auth.logout", function() { 
+		#{reaction} 
+	});
+}
+			options[:ready] ? wrap_ready(script) : script
+		end
+
+		def fb_onlogin_redirect_to path, options = {}
+			script = %Q{FB.Event.subscribe("auth.login", function() { 
+	window.location = '#{path}' 
+	}); 
+}
+			options[:ready] ? wrap_ready(script) : script
+		end
+
+		def fb_onlogin_react options = {}, &block
+			block_content = yield if block
+			reaction = options[:reaction] || block_content || ' // on login'
+			script = %Q{FB.Event.subscribe("auth.login", function() { 
+		#{reaction} 
+	});
 }
 			options[:ready] ? wrap_ready(script) : script
 		end

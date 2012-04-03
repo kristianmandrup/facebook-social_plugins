@@ -1,4 +1,4 @@
-module FacebookSocialPlugins
+module FacebookSocialPlugins::Plugin
 	class LikeButton < Button
 		def initialize options = {}
 			super

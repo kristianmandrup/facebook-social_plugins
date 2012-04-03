@@ -1,7 +1,5 @@
-require 'facebook-social_plugins/social_plugin'
-
-module FacebookSocialPlugins
-	class Button < SocialPlugin
+module FacebookSocialPlugins::Plugin
+	class Button < Social
 		def initialize options = {}
 			super
 		end

@@ -1,4 +1,4 @@
-module FacebookSocialPlugins
+module FacebookSocialPlugins::Plugin
 	class SendButton < Button
 		def initialize options = {}
 			super

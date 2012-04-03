@@ -2,12 +2,13 @@
 
 The Facebook Social plugins for Rails 3 consist of:
 
-* ViewHelper
-* ScriptHelper
+* Helper::View
+* Helper::Script
+* Helper::OpenGraph # see https://developers.facebook.com/docs/opengraph/
 
-The `ViewHelper` contains methods for inserting the HTML5 <div> elements for Facebook social plugins
+The `Helper::View` contains methods for inserting the HTML5 <div> elements for Facebook social plugins
 
-The `ScriptHelper` contains methods for inserting <script> snippets for Facebook integration, such as displaying the Social plugins with the Facebook layout/styling applied etc.
+The `Helper::Script` contains methods for inserting <script> snippets for Facebook integration, such as displaying the Social plugins with the Facebook layout/styling applied etc.
 
 == Social plugins
 
@@ -26,7 +27,7 @@ Currently the following Social plugins are included in this gem
 * Send Button
 * Subscribe Button
 
-(see below)
+(see more info below)
 
 == Script Helpers
 
@@ -35,83 +36,39 @@ Currently the following Social plugins are included in this gem
 
 The async_init_script requires the Facebook app_id, fx '753632322' and the domain name of the app, fx 'www.example.com'. You can also specify the channel file (will default to channel file in vendor/assets of this gem)
 
-=== Channel File
-
-The channel file addresses some issues with cross domain communication in certain browsers. The contents of the channel.html file can be just a single line:
-
-<script src="//connect.facebook.net/en_US/all.js"></script>
-
-=== JavaScript SDK
-
-The JavaScript SDK provides a rich set of client-side functionality for accessing Facebook's server-side API calls. These include all of the features of the REST API, Graph API, and Dialogs. Further, it provides a mechanism for rendering of the XFBML versions of our Social Plugins, and a way for Canvas pages to communicate with Facebook.
-
-You will need an app ID to initialize the SDK, which you can obtain from the Developer App.
-
-For example usage, check out Facebook for Websites and the Authentication guide. We also have a JavaScript Test Console which allows you to test and debug common JavaScript SDK methods.
-
-The JavaScript SDK supports OAuth 2.0.
-
-*Loading*
-
-The following code will load and initialize the JavaScript SDK with all common options. Replace YOUR_APP_ID and WWW.YOUR_DOMAIN.COM with the appropriate values. The best place to put this code is right after the opening <body> tag.
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : 'YOUR_APP_ID', // App ID
-      channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
-      status     : true, // check login status
-      cookie     : true, // enable cookies to allow the server to access the session
-      xfbml      : true  // parse XFBML
-    });
-
-    // Additional initialization code here
-  };
-
-  // Load the SDK Asynchronously
-  (function(d){
-     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement('script'); js.id = id; js.async = true;
-     js.src = "//connect.facebook.net/en_US/all.js";
-     ref.parentNode.insertBefore(js, ref);
-   }(document));
-</script>
-This code loads the SDK asynchronously so it does not block loading other elements of your page. 
-
-*Localization*
-
-The JavaScript SDK is available in all locales that are supported by Facebook. This list of supported locales is available as an XML file. To change the locale of the SDK to match the locale of your site, change en_US to a supported locale code when loading the SDK. For example, if your site is in Spanish, using the following code to load the SDK will cause all Social Plugins to be rendered in Spanish.
-
-<script>
-  (function(d){
-     var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-     js = d.createElement('script'); js.id = id; js.async = true;
-     js.src = "//connect.facebook.net/es_LA/all.js";
-     d.getElementsByTagName('head')[0].appendChild(js);
-   }(document));
-</script>
-
 === Configuration scripts*
 
 * fb_async_init_script(app_id, domain)
 * fb_channel_script(locale = :en_US)
 
-=== Login and Logout
+=== Login
 
-* fb_logout_and_reload(options = {:ready => false, :selector => '#fb_logout_and_reload'})
-* fb_login_and_reload(options = {:ready => false, :selector => '#fb_login_and_reload'})
+* fb_login_click_react(options, &block)
+* fb_login_react(options, &block)
+* fb_onlogin_react(options, &block)
+* fb_onlogin_redirect_to(path, options)
+
+=== Logout
+
+* fb_logout_click_react(options, &block)
+* fb_logout_react(options, &block)
+* fb_onlogout_react(options, &block)
+* fb_onlogout_redirect_to(path, options)
+
+* fb_login_and_react(options = {:selector => '#fb_login_and_reload'})
 * fb_logout_and_redirect_to(path, options = {:ready => false})
 
-== Open Graph Meta helper
+== Open Graph Helper
 
 Convenience method to generate all header/meta tags for Facebook Open Graph
 
 * open_graph_meta(name, namespace, app_id, object_type, options = {})
 
-* og_header(name, namespace) - Open Graph <head> tag
+*<head> tag helper*
 
-Open graph <meta> tag helpers
+* og_header(name, namespace)
+
+*<meta> tag helpers*
 
 * og_type(app_id, object_type)
 * og_title(title)
@@ -120,13 +77,13 @@ Open graph <meta> tag helpers
 * og_desc(desc)
 * fb_app_id(app_id)
 
-== Extras
+== Extra View helpers
 
 * fb_analytics(app_id) # Facebook analytics meta tag
 * fb_activity(namespace, action) # Open Graph action to perform
 
-* fb_logout(script) # setup FB event handler to trigger on FB logout
-* fb_logout_and_redirect_to(path) # setup FB event handler to trigger on FB logout and redirect
+* fb_onlogout(script) # setup FB event handler to trigger on FB logout
+* fb_onlogout_redirect_to(path) # setup FB event handler to trigger on FB logout and redirect
 
 == Social plugins
 

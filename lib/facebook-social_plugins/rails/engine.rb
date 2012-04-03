@@ -2,10 +2,9 @@ module FacebookSocialPlugins
 	module Rails
 		class Engine < ::Rails::Engine
 			initializer 'setup rails' do				
-				ActionView::Base.send :include, FacebookSocialPlugins::ViewHelper
-				ActionView::Base.send :include, FacebookSocialPlugins::ScriptHelper
-
-				ActionView::Base.send :include, FacebookSocialPlugins::OpenGraph::MetaHelper
+				FacebookSocialPlugins.helpers.each do |helper|
+					ActionView::Base.send :include, "FacebookSocialPlugins::Helper::#{helper.to_s.camelize}".constantize
+				end
 			end
 		end
 	end

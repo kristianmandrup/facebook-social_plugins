@@ -1,5 +1,5 @@
-module FacebookSocialPlugins
-	class RecommendationsBox < SocialPlugin
+module FacebookSocialPlugins::Plugin
+	class RecommendationsBox < Social
 		def initialize options = {}
 			super
 		end

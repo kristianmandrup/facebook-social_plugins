@@ -1,6 +1,6 @@
-module FacebookSocialPlugins
+module FacebookSocialPlugins::Plugin
 	# Also see AddToTimeline.txt of this gem for example of using OpenGraph with this feature.
-	class AddToTimeline < SocialPlugin
+	class AddToTimeline < Social
 		def initialize options = {}
 			super
 		end

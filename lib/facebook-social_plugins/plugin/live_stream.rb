@@ -1,5 +1,5 @@
-module FacebookSocialPlugins
-	class LiveStream < SocialPlugin
+module FacebookSocialPlugins::Plugin
+	class LiveStream < Social
 		def initialize options = {}
 			super
 		end

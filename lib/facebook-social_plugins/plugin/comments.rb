@@ -1,5 +1,5 @@
-module FacebookSocialPlugins
-	class Comments < SocialPlugin
+module FacebookSocialPlugins::Plugin
+	class Comments < Social
 		def initialize options = {}
 			super
 		end

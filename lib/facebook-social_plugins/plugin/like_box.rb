@@ -1,5 +1,5 @@
-module FacebookSocialPlugins
-	class LikeBox < SocialPlugin
+module FacebookSocialPlugins::Plugin
+	class LikeBox < Social
 		def initialize options = {}
 			super
 		end

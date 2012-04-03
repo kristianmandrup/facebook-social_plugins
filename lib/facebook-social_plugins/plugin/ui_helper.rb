@@ -1,4 +1,4 @@
-module FacebookSocialPlugins
+module FacebookSocialPlugins::Plugin
 	class UiHelper
     include ActionView::Helpers::TagHelper,
             ActionView::Helpers::UrlHelper,

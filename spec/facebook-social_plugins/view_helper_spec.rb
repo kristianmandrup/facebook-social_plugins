@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe FacebookSocialPlugins::ViewHelper do
+describe FacebookSocialPlugins::Helper::View do
   include ControllerTestHelpers,
-          FacebookSocialPlugins::ViewHelper
+          FacebookSocialPlugins::Helper::View
 
   describe 'Social plugin' do
     it "should not create plugin if unknown attribute is encountered" do

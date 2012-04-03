@@ -1,6 +1,5 @@
-module FacebookSocialPlugins
-	# <div class="fb-login-button" data-show-faces="true" data-width="200" data-max-rows="1"></div>
-	class LoginButton < SocialPlugin
+module FacebookSocialPlugins::Plugin
+	class LoginButton < Social
 		def initialize options = {}
 			super
 		end

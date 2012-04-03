@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe FacebookSocialPlugins::OpenGraph::MetaHelper do
+describe FacebookSocialPlugins::Helper::OpenGraph do
   include ControllerTestHelpers,
-          FacebookSocialPlugins::OpenGraph::MetaHelper
+          FacebookSocialPlugins::Helper::OpenGraph
 
   describe 'OpenGraph Meta helper' do
     it "should write Open Graph meta tags " do

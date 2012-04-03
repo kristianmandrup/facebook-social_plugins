@@ -1,5 +1,5 @@
-module FacebookSocialPlugins
-	class ActivityFeed < SocialPlugin
+module FacebookSocialPlugins::Plugin
+	class ActivityFeed < Social
 		def initialize options = {}
 			super
 		end
