@@ -9,6 +9,25 @@ The `ViewHelper` contains methods for inserting the HTML5 <div> elements for Fac
 
 The `ScriptHelper` contains methods for inserting <script> snippets for Facebook integration, such as displaying the Social plugins with the Facebook layout/styling applied etc.
 
+== Social plugins
+
+Currently the following Social plugins are included in this gem
+
+* Root
+* Activity Feed
+* Comments
+* Facepile
+* Like Box
+* Like Button
+* Live Stream
+* Login Button
+* Recommendations Box
+* Registration
+* Send Button
+* Subscribe Button
+
+(see below)
+
 == Script Helpers
 
 * async_init_script(app_id, domain, options = {})
@@ -72,6 +91,28 @@ The JavaScript SDK is available in all locales that are supported by Facebook. T
      d.getElementsByTagName('head')[0].appendChild(js);
    }(document));
 </script>
+
+== Open Graph Meta helper
+
+Convenience method to generate all header/meta tags for Facebook Open Graph
+
+* open_graph_meta(name, namespace, app_id, object_type, options = {})
+
+* og_header(name, namespace) - Open Graph <head> tag
+
+Open graph <meta> tag helpers
+
+* og_type(app_id, object_type)
+* og_title(title)
+* og_image(image_url)
+* og_url(href)
+* og_desc(desc)
+* fb_app_id(app_id)
+
+== Extras
+
+* fb_analytics(app_id) # Facebook analytics meta tag
+* fb_activity(namespace, action) # Open Graph action to perform
 
 == Social plugins
 

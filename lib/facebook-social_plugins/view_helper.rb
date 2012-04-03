@@ -8,6 +8,10 @@ module FacebookSocialPlugins
 			FacebookSocialPlugins::Analytics.new(app_id).render
 		end		
 
+		def fb_activity namespace, action
+			content_tag :div, '', :class => "fb-activity", :'data-actions' => "#{namespace}:#{action}"
+		end		
+
 		def fb_activity_feed options = {}
 			FacebookSocialPlugins::ActivityFeed.new(options).render
 		end
