@@ -36,7 +36,6 @@ The JavaScript SDK supports OAuth 2.0.
 
 The following code will load and initialize the JavaScript SDK with all common options. Replace YOUR_APP_ID and WWW.YOUR_DOMAIN.COM with the appropriate values. The best place to put this code is right after the opening <body> tag.
 
-<div id="fb-root"></div>
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -78,6 +77,7 @@ The JavaScript SDK is available in all locales that are supported by Facebook. T
 
 Currently the following Social plugins are included in this gem
 
+* Root
 * Activity Feed
 * Comments
 * Facepile
@@ -107,6 +107,12 @@ View methods exposed:
 * fb_subscribe_button (options = {})
 
 Note: You don't have to worry about dashed or underscored properties. Conversions will be handled automatically. The Facebook Social plugins API is (sadly) not very consistent when it comes to attribute names. 
+
+=== Facebook root
+
+<div id="fb-root"></div>
+
+A Facebook placeholder div
 
 === Activity feed
 
