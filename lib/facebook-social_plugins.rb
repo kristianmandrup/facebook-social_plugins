@@ -21,7 +21,7 @@ module FacebookSocialPlugins
 		['script', 'view', 'open_graph']
 	end
 
-	def self.plugin name, options
+	def self.plugin name, options = {}
 		klass = "FacebookSocialPlugins::Plugin::#{name.to_s.camelize}".constantize
 		klass.new(options).render
 	end

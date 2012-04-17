@@ -13,8 +13,8 @@ module FacebookSocialPlugins::Helper
 		end		
 
 		FacebookSocialPlugins.plugins.each do |name|
-			define_method :"fb_#{name}" do |options = {}|
-				FacebookSocialPlugins.plugin name, options				
+			define_method :"fb_#{name}" do |options|
+				FacebookSocialPlugins.plugin name, options
 			end
 		end
 
