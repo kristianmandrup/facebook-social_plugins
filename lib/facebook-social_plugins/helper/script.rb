@@ -98,7 +98,7 @@ module FacebookSocialPlugins::Helper
 		# options - status, cookie, xfbml (true|false)
 		# - :channel => 'channel.html'
 		def fb_async_init_script app_id, domain, options = {}
-			raise ArgumentError, "Not a valid Facebook App ID. It should be a 15 digit number" unless valid_facebook_id?(app_id)
+			raise ArgumentError, "Not a valid Facebook App ID. It should be a 15 digit number, was: #{app_id}, length=#{app_id.size}" unless valid_facebook_id?(app_id)
 			raise ArgumentError, "No domain name specified" if domain.blank?
 
 			if options[:channel] || options[:channel_url]
@@ -124,7 +124,8 @@ module FacebookSocialPlugins::Helper
 		 end			
 
 		def valid_facebook_id? id
-			id ~= /\d{15}/
+			raise ArgumentError, "No Facebook app id specified" if id.blank?
+			id = /\d{15}/
 		end
 
 		def fb_channel_script locale = :en_US
