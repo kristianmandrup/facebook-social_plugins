@@ -100,8 +100,14 @@ module FacebookSocialPlugins::Helper
 		def fb_async_init_script app_id, domain, options = {}
 			raise ArgumentError, "Not a valid Facebook App ID. It should be a 15 digit number" unless valid_facebook_id?(app_id)
 			raise ArgumentError, "No domain name specified" if domain.blank?
-			channel = options[:channel_url] || 'assets/facebook_channel' if options[:channel] || options[:channel_url]
-			channelAttrib = channel ? "channelUrl : '//#{domain}/#{channel}.html', // Channel File" : ''
+
+			if options[:channel] || options[:channel_url]
+				locale = options[:locale] || I18n.locale
+				channel = options[:channel_url] || "assets/facebook_channel_#{locale}" 
+				channelAttrib = "channelUrl : '//#{domain}/#{channel}.html', // Channel File"
+			else
+				channelAttrib = '// No Facebook channel defined (use fx #fb_channel_script)'
+			end
 			%Q{
   window.fbAsyncInit = function() {
     FB.init({
