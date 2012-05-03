@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = "2012-04-17"
+  s.date = "2012-05-03"
   s.description = "HTML5 compatible social plugin helpers for Rails 3"
   s.email = "kmandrup@gmail.com"
   s.extra_rdoc_files = [
@@ -59,7 +59,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/kristianmandrup/facebook-social_plugins"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.22"
+  s.rubygems_version = "1.8.24"
   s.summary = "Facebook HTML5 style social plugins for Rails 3"
 
   if s.respond_to? :specification_version then
