@@ -27,7 +27,7 @@ Currently the following Social plugins are included in this gem
 * Send Button
 * Subscribe Button
 
-(see more info below)
+See detailed usage instructions on the [wiki](https://github.com/kristianmandrup/facebook-social_plugins/wiki/Social-Plugins)
 
 ## Script Helpers
 
